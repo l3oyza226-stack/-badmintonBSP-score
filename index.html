@@ -175,6 +175,7 @@
   .sportsmanship-card.fullscreen-view .sportsmanship-copy p{font-size:48px; height:72px; overflow:hidden; white-space:nowrap;}
   .sportsmanship-card.fullscreen-view .sportsmanship-track{position:absolute; left:0; top:50%; width:max-content;}
   .sportsmanship-card.fullscreen-view .sportsmanship-text{white-space:nowrap;}
+  .sportsmanship-minimize-btn{position:absolute; top:14px; right:14px; z-index:1;}
   body.sportsmanship-fullscreen-active{overflow:hidden;}
   .sportsmanship-mark{font-size:28px; line-height:1;}
   .sportsmanship-copy{width:100%; min-width:0; min-height:206px; display:flex; flex-direction:column; align-items:center;}
@@ -604,6 +605,10 @@ function renderPublic(){
   } else {
     body.innerHTML = renderTeamCheckHtml();
   }
+  const minimizeSportsmanshipButton = document.getElementById('btnMinimizeSportsmanship');
+  if(minimizeSportsmanshipButton){
+    minimizeSportsmanshipButton.addEventListener('click', minimizeSportsmanship);
+  }
   startAnnouncementScroll();
 }
 
@@ -686,7 +691,7 @@ function renderOverviewHtml(tally){
   const sportsMessage = escapeHtml(state.sportsMessage || '');
 
   if(sportsmanshipFullscreen){
-    return `<div class="sportsmanship-card fullscreen-view" aria-live="polite"><div class="sportsmanship-copy"><h3>กระดานประกาศแห่งมิตรภาพ</h3><p><span class="sportsmanship-track"><span class="sportsmanship-text">${sportsMessage}</span></span></p></div></div>`;
+    return `<div class="sportsmanship-card fullscreen-view" aria-live="polite"><button class="btn secondary small sportsmanship-minimize-btn" id="btnMinimizeSportsmanship" type="button" title="ย่อกระดาน">↙ ย่อ</button><div class="sportsmanship-copy"><h3>กระดานประกาศแห่งมิตรภาพ</h3><p><span class="sportsmanship-track"><span class="sportsmanship-text">${sportsMessage}</span></span></p></div></div>`;
   }
 
   return `
@@ -1006,13 +1011,18 @@ document.querySelector('.brand').addEventListener('keydown', (e)=>{
   showPublicOverview();
 });
 
-document.addEventListener('keydown', (e)=>{
-  if(e.key !== 'Escape' || !sportsmanshipFullscreen) return;
+function minimizeSportsmanship(){
+  if(!sportsmanshipFullscreen) return;
   sportsmanshipFullscreen = false;
   localStorage.setItem('sportsmanshipFullscreen', 'false');
   document.body.classList.remove('sportsmanship-fullscreen-active');
   if(currentView === 'public') renderPublic();
   else renderAdmin();
+}
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Escape') return;
+  minimizeSportsmanship();
 });
 
 async function init(){
