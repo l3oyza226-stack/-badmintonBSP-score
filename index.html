@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ศึกแบดมินตัน สีแดง VS สีฟ้า</title>
+<title>กีฬาสีกลุ่มแบดสัมพันธ์</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -142,7 +142,6 @@
   .tally-card.red .tally-team{color:#ff8080;}
   .tally-card.blue .tally-team{color:#8fc7f5;}
   .tally-num{font-family:'Teko',sans-serif; font-size:56px; font-weight:700; line-height:1;}
-  .tally-sub{font-size:11px; color:var(--text-dim); margin-top:2px;}
   .result-chart{display:grid; grid-template-columns:1fr 1fr; gap:22px; height:142px; margin-bottom:6px;}
   .result-bar-column{display:grid; grid-template-rows:auto 1fr auto; justify-items:center; gap:5px; min-width:0;}
   .result-bar-label{font-size:12px; font-weight:700;}
@@ -151,15 +150,51 @@
   .result-bar{width:100%; min-height:18%; border-radius:4px 4px 0 0; display:flex; align-items:flex-start; justify-content:center; padding-top:5px; color:#fff; font:700 12px 'Space Mono',monospace; transition:height .3s ease;}
   .result-bar.red{background:linear-gradient(90deg, #a92d35, var(--red));}
   .result-bar.blue{background:linear-gradient(90deg, #236ca8, var(--blue));}
-  .result-bar-score{font-size:10px; color:var(--text-dim); text-align:center;}
+  .celebration{position:relative; overflow:hidden; min-height:112px; display:flex; align-items:center; justify-content:center; margin:0 0 12px; border:1px solid var(--gold); border-radius:10px; background:radial-gradient(circle at 50% 100%, rgba(230,179,37,0.15), transparent 55%), var(--bg-panel); text-align:center;}
+  .celebration-copy{position:relative; z-index:2; color:var(--gold); font-family:'Teko',sans-serif; font-size:25px; font-weight:700;}
+  .trophy-mark{position:relative; z-index:2; margin-right:10px; font-size:42px; line-height:1; filter:drop-shadow(0 0 8px rgba(230,179,37,0.8)); animation:trophyGlow 1.8s ease-in-out infinite;}
+  @keyframes trophyGlow{50%{transform:scale(1.08); filter:drop-shadow(0 0 16px rgba(230,179,37,1));}}
+  .fireworks-overlay{position:fixed; inset:0; z-index:40; pointer-events:none; overflow:hidden;}
+  .firework{position:absolute; width:4px; height:4px; border-radius:50%; color:var(--gold); background:currentColor; box-shadow:0 0 0 0 currentColor; animation:firework 2.5s ease-out infinite;}
+  .firework.one{left:10%; top:22%;} .firework.two{left:28%; top:44%; animation-delay:.7s; color:var(--blue);}
+  .firework.three{left:48%; top:18%; animation-delay:1.3s; color:var(--red);}
+  .firework.four{left:68%; top:38%; animation-delay:1.8s; color:#4fd1e8;}
+  .firework.five{left:88%; top:20%; animation-delay:2.1s; color:var(--gold);}
+  .firework.six{left:18%; top:72%; animation-delay:.35s; color:var(--red);}
+  .firework.seven{left:52%; top:66%; animation-delay:1s; color:var(--gold);}
+  .firework.eight{left:82%; top:78%; animation-delay:1.65s; color:var(--blue);}
+  @keyframes firework{0%,100%{opacity:0; box-shadow:0 0 0 0 currentColor;} 15%{opacity:1;} 65%{opacity:0; box-shadow:0 -42px 0 -1px currentColor, 30px -30px 0 -1px currentColor, 42px 0 0 -1px currentColor, 30px 30px 0 -1px currentColor, 0 42px 0 -1px currentColor, -30px 30px 0 -1px currentColor, -42px 0 0 -1px currentColor, -30px -30px 0 -1px currentColor;}}
   .result-hidden{display:flex; align-items:center; justify-content:center; min-height:82px; margin-bottom:6px; border:2px solid var(--gold); border-radius:8px; background:rgba(230,179,37,0.06); box-shadow:0 0 0 1px rgba(230,179,37,0.12) inset; color:var(--gold); font-size:13px; font-weight:700;}
-  .announce-card{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .announce-card{display:flex; align-items:center; justify-content:space-between; gap:16px; margin:18px 0 18px;}
   .announce-card p{color:var(--text-dim); font-size:12px; margin-top:4px;}
   .announce-state{font-size:12px; color:var(--gold); white-space:nowrap;}
+  .sportsmanship-card{display:flex; align-items:flex-start; justify-content:center; position:relative; z-index:20; min-height:240px; gap:14px; margin:18px 0 22px; padding:16px 18px; border:1px solid rgba(79,209,232,0.35); border-left:4px solid #4fd1e8; border-radius:10px; background:linear-gradient(135deg, rgba(19,26,34,0.98), rgba(14,26,20,0.98)); text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.28);}
+  .sportsmanship-card.hidden{display:none;}
+  .sportsmanship-card.fullscreen-view{position:fixed; top:50%; left:50%; z-index:2000; width:min(960px, calc(100vw - 32px)); min-height:0; height:min(540px, calc(100vh - 32px)); margin:0; padding:28px; border:1px solid rgba(79,209,232,0.6); border-radius:10px; transform:translate(-50%, -50%); justify-content:center; align-items:center;}
+  .sportsmanship-card.fullscreen-view .sportsmanship-copy{min-height:0;}
+  .sportsmanship-card.fullscreen-view .sportsmanship-copy p{font-size:48px; height:72px; overflow:hidden; white-space:nowrap;}
+  .sportsmanship-card.fullscreen-view .sportsmanship-track{position:absolute; left:0; top:50%; width:max-content;}
+  .sportsmanship-card.fullscreen-view .sportsmanship-text{white-space:nowrap;}
+  body.sportsmanship-fullscreen-active{overflow:hidden;}
+  .sportsmanship-mark{font-size:28px; line-height:1;}
+  .sportsmanship-copy{width:100%; min-width:0; min-height:206px; display:flex; flex-direction:column; align-items:center;}
+  .sportsmanship-copy h3{font-family:'Teko',sans-serif; font-size:21px; color:#8fe8f5; margin-bottom:4px; text-decoration:underline; text-underline-offset:3px;}
+  .sportsmanship-copy p{position:relative; color:var(--text); font-size:34px; font-weight:700; line-height:1.35; white-space:nowrap; overflow:hidden; width:100%; height:46px; margin-top:auto; margin-bottom:auto;}
+  .sportsmanship-copy p span.sportsmanship-track{position:absolute; left:0; top:50%; display:inline-block; width:max-content; will-change:transform;}
+  .sportsmanship-copy p span.sportsmanship-text{display:inline-block; white-space:nowrap;}
+  @keyframes announcementScroll{from{transform:translate(0,-50%);}to{transform:translate(calc(-100% - 100vw),-50%);}}
+  .message-editor{display:flex; flex-direction:column; gap:7px;}
+  .message-editor label{font-size:11px; color:var(--text-dim);}
+  .message-editor textarea{width:100%; min-height:92px; resize:vertical; background:var(--bg); border:1px solid var(--line); color:var(--text); padding:9px; border-radius:6px; font-size:13px; line-height:1.6; font-family:'Inter',sans-serif;}
+  .message-editor textarea:focus{outline:none; border-color:var(--gold);}
+  .sportsmanship-admin-controls{display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-bottom:10px;}
   @media(max-width:520px){
     .result-chart{height:126px; gap:12px;}
     .result-bar-label{font-size:11px;}
     .announce-card{align-items:flex-start; flex-direction:column;}
+    .sportsmanship-card{padding:14px 12px; gap:10px;}
+    .sportsmanship-copy p{font-size:26px; height:36px;}
+    .trophy-mark{font-size:34px;}
   }
 
   /* Results table */
@@ -188,13 +223,14 @@
   td.team-r{color:#ff8080;} td.team-b{color:#8fc7f5;}
 
   /* ===== ADMIN VIEW ===== */
-  .admin-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .admin-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
   .card{background:var(--bg-panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px;}
   .card h3{font-family:'Teko',sans-serif; font-size:20px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
   .card h3 .dot{width:8px;height:8px;border-radius:50%;}
   .card h3 .dot.r{background:var(--red);} .card h3 .dot.b{background:var(--blue);}
-  .pair-row{display:grid; grid-template-columns:26px 1fr 1fr; gap:6px; margin-bottom:6px; align-items:center;}
+  .pair-row{display:grid; grid-template-columns:26px minmax(0,1fr) minmax(0,1fr) 30px; gap:10px; margin-bottom:10px; align-items:center;}
   .pair-row .idx{font-size:11px; color:var(--text-dim); text-align:center; font-family:'Space Mono',monospace;}
+  .del-pair-btn{width:30px; padding:6px 0;}
   input[type=text], select, input[type=number]{
     width:100%; background:var(--bg); border:1px solid var(--line); color:var(--text);
     padding:7px 9px; border-radius:6px; font-size:13px; font-family:'Inter',sans-serif;
@@ -206,6 +242,10 @@
   }
   .match-admin-row:last-child{border-bottom:none;}
   .match-admin-row .idx{font-size:11px; color:var(--text-dim); font-family:'Space Mono',monospace;}
+  .match-admin-header > div{font-size:13px !important; font-weight:700;}
+  .match-admin-header .header-red{color:#ff8080;}
+  .match-admin-header .header-blue{color:#8fc7f5;}
+  .match-admin-header .header-status{color:var(--gold) !important;}
   .btn{
     background:var(--gold); color:#1a1400; border:none; padding:8px 16px; border-radius:7px;
     font-weight:700; font-size:12px; cursor:pointer; letter-spacing:0.03em;
@@ -214,14 +254,24 @@
   .btn.small{padding:6px 10px; font-size:11px;}
   .btn:hover{filter:brightness(1.08);}
   .save-bar{
-    position:sticky; bottom:0; margin-top:20px; background:var(--bg-panel); border:1px solid var(--line);
+    margin:0 0 12px; background:var(--bg-panel); border:1px solid var(--line);
     border-radius:12px; padding:12px 16px; display:flex; justify-content:space-between; align-items:center;
-    box-shadow:0 -8px 24px rgba(0,0,0,0.4);
+    box-shadow:0 6px 18px rgba(0,0,0,0.24);
   }
   .save-status{font-size:12px; color:var(--text-dim);}
+  .save-status.ready{color:#7fd88f;}
   .full-w{grid-column:1/-1;}
   .status-select{padding:5px 6px; font-size:11px;}
   .empty-hint{color:var(--text-dim); font-size:12px; padding:8px 0;}
+  .login-panel{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,0.72);}
+  .login-panel[hidden]{display:none;}
+  .confirm-panel{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,0.72);}
+  .confirm-panel[hidden]{display:none;}
+  .login-box{width:min(360px,100%); background:var(--bg-panel); border:1px solid var(--gold); border-radius:10px; padding:20px; box-shadow:0 12px 40px rgba(0,0,0,0.5);}
+  .login-box h2{font-family:'Teko',sans-serif; font-size:25px; margin-bottom:14px;}
+  .login-box label{display:block; color:var(--text-dim); font-size:11px; margin:10px 0 5px;}
+  .login-actions{display:flex; justify-content:flex-end; gap:8px; margin-top:16px;}
+  .login-error{color:#ff8080; font-size:11px; min-height:15px; margin-top:8px;}
   @media(max-width:760px){
     .topbar{padding:10px 12px; gap:8px;}
     .brand{gap:7px; min-width:0;}
@@ -268,7 +318,8 @@
     .results-table-wrap .status-pill{font-size:9px; padding:2px 4px;}
     .card{padding:13px 12px; border-radius:9px;}
     .card h3{font-size:18px; margin-bottom:10px;}
-    .pair-row{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr); gap:4px;}
+    .pair-row{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 26px; gap:6px;}
+    .del-pair-btn{width:26px; padding:6px 0;}
     input[type=text], select, input[type=number]{padding:8px 7px; font-size:12px;}
     .card.full-w{overflow:hidden;}
     .match-admin-row{min-width:0; grid-template-columns:18px minmax(0,1fr) minmax(0,1fr) 36px 36px 68px 24px; gap:3px; font-size:10px;}
@@ -290,12 +341,46 @@
   </div>
   <div class="view-toggle">
     <button id="btnPublic" class="active">หน้าจอแสดงผล</button>
-    <button id="btnAdmin">หลังบ้าน</button>
+    <button id="btnAdmin">Admin</button>
   </div>
 </div>
 
 <div class="wrap" id="publicView"></div>
 <div class="wrap" id="adminView" style="display:none;"></div>
+<div class="login-panel" id="loginPanel" hidden>
+  <form class="login-box" id="loginForm">
+    <h2>Admin Login</h2>
+    <label for="adminEmail">อีเมล</label>
+    <input id="adminEmail" type="email" autocomplete="username" required>
+    <label for="adminPassword">รหัสผ่าน</label>
+    <input id="adminPassword" type="password" autocomplete="current-password" required>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-actions">
+      <button type="button" class="btn secondary" id="cancelLogin">ยกเลิก</button>
+      <button type="submit" class="btn">เข้าสู่ระบบ</button>
+    </div>
+  </form>
+</div>
+<div class="confirm-panel" id="publishConfirm" hidden>
+  <div class="login-box">
+    <h2>ยืนยันการประกาศผล</h2>
+    <p>เมื่อตกลงแล้ว ผู้ชมจะเห็นกราฟ พลุดอกไม้ไฟ และทีมที่ชนะ</p>
+    <div class="login-actions">
+      <button type="button" class="btn secondary" id="cancelPublish">ยกเลิก</button>
+      <button type="button" class="btn" id="confirmPublish">ยืนยันประกาศผล</button>
+    </div>
+  </div>
+</div>
+<div class="confirm-panel" id="deleteConfirm" hidden>
+  <div class="login-box">
+    <h2>ยืนยันการลบคู่</h2>
+    <p>ข้อมูลสมาชิกของคู่นี้จะถูกลบ และไม่สามารถย้อนกลับได้</p>
+    <div class="login-actions">
+      <button type="button" class="btn secondary" id="cancelDelete">ยกเลิก</button>
+      <button type="button" class="btn" id="confirmDelete">ยืนยันลบคู่</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const TEAMS = ['red','blue'];
@@ -306,6 +391,39 @@ let saveTimer = null;
 let pollTimer = null;
 let currentView = 'public';
 let publicTab = 'overview';
+let pendingDelete = null;
+let announcementAnimationFrame = null;
+let announcementPosition = null;
+let sportsmanshipHidden = JSON.parse(localStorage.getItem('sportsmanshipHidden') || 'false');
+let sportsmanshipFullscreen = JSON.parse(localStorage.getItem('sportsmanshipFullscreen') || 'false');
+const firebaseConfig = {
+  apiKey: 'AIzaSyDHYacPevPMMvm2v3O_wbnwH7CiWIIO7Ag',
+  authDomain: 'badmintonbsp-score.firebaseapp.com',
+  projectId: 'badmintonbsp-score',
+  storageBucket: 'badmintonbsp-score.firebasestorage.app',
+  messagingSenderId: '521337649956',
+  appId: '1:521337649956:web:2afcae1b3fdf2f751511b1'
+};
+let firestore = null;
+let firestoreApi = null;
+let firebaseAuth = null;
+let authApi = null;
+let firebaseLoadError = null;
+let dataReady = false;
+const firebaseReady = Promise.race([
+  Promise.all([
+  import('https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js'),
+  import('https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js'),
+  import('https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js')
+  ]),
+  new Promise((_, reject)=>setTimeout(()=>reject(new Error('Firebase SDK timeout')), 8000))
+]).then(([appApi, dbApi, authModule])=>{
+  const app = appApi.initializeApp(firebaseConfig);
+  firestore = dbApi.getFirestore(app);
+  firestoreApi = dbApi;
+  firebaseAuth = authModule.getAuth(app);
+  authApi = authModule;
+}).catch(error=>{ firebaseLoadError = error; });
 
 function defaultState(){
   const pairs = {red:[], blue:[]};
@@ -324,14 +442,26 @@ function defaultState(){
       status: i===0 ? 'live' : 'upcoming'
     });
   }
-  return {pairs, matches, resultsPublished:false};
+  return {pairs, matches, resultsPublished:false, sportsMessage:'ขอให้นักกีฬาทุกคนเล่นด้วยความตั้งใจ ให้เกียรติคู่แข่ง และส่งกำลังใจให้กัน เพราะมิตรภาพที่ดีงดงามกว่าชัยชนะเสมอ'};
 }
 
 const hasCloudStorage = (typeof window.storage !== 'undefined' && window.storage && typeof window.storage.get === 'function');
 
 async function loadState(){
+  dataReady = false;
   try{
-    if(hasCloudStorage){
+    await firebaseReady;
+    if(firestore){
+      const ref = firestoreApi.doc(firestore, 'scoreboard', 'current');
+      const snapshot = await firestoreApi.getDoc(ref);
+      if(snapshot.exists() && snapshot.data().state){
+        state = snapshot.data().state;
+      } else {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        state = raw ? JSON.parse(raw) : defaultState();
+        await saveState();
+      }
+    } else if(hasCloudStorage){
       const res = await window.storage.get(STORAGE_KEY, true);
       state = (res && res.value) ? JSON.parse(res.value) : defaultState();
     } else {
@@ -340,25 +470,39 @@ async function loadState(){
     }
   }catch(e){
     state = defaultState();
+    return;
   }
   if(typeof state.resultsPublished !== 'boolean') state.resultsPublished = false;
+  if(typeof state.sportsMessage !== 'string') state.sportsMessage = defaultState().sportsMessage;
+  dataReady = true;
+}
+
+function setSaveStatus(text, ready){
+  const el = document.getElementById('saveStatus');
+  if(!el) return;
+  el.textContent = text;
+  el.classList.toggle('ready', ready);
 }
 
 async function saveState(){
   try{
-    if(hasCloudStorage){
+    await firebaseReady;
+    if(firestore){
+      const ref = firestoreApi.doc(firestore, 'scoreboard', 'current');
+      await firestoreApi.setDoc(ref, {state, updatedAt: new Date().toISOString()});
+    } else if(hasCloudStorage){
       await window.storage.set(STORAGE_KEY, JSON.stringify(state), true);
     } else {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
-    document.getElementById('saveStatus') && (document.getElementById('saveStatus').textContent = 'บันทึกแล้ว ' + new Date().toLocaleTimeString('th-TH') + (hasCloudStorage ? '' : ' (เก็บในเครื่องนี้เท่านั้น)'));
+    setSaveStatus('บันทึกแล้ว ' + new Date().toLocaleTimeString('th-TH') + (firestore || hasCloudStorage ? '' : ' (เก็บในเครื่องนี้เท่านั้น)'), true);
   }catch(e){
-    document.getElementById('saveStatus') && (document.getElementById('saveStatus').textContent = 'บันทึกไม่สำเร็จ: ' + (e && e.message ? e.message : 'ลองใหม่อีกครั้ง'));
+    setSaveStatus('บันทึกไม่สำเร็จ: ' + (e && e.message ? e.message : 'ลองใหม่อีกครั้ง'), false);
   }
 }
 
 function scheduleSave(){
-  document.getElementById('saveStatus') && (document.getElementById('saveStatus').textContent = 'กำลังบันทึก...');
+  setSaveStatus('กำลังบันทึก...', false);
   clearTimeout(saveTimer);
   saveTimer = setTimeout(saveState, 500);
 }
@@ -414,8 +558,33 @@ function pairStats(team){
 }
 
 /* ---------- PUBLIC VIEW ---------- */
+function startAnnouncementScroll(){
+  cancelAnimationFrame(announcementAnimationFrame);
+  const track = document.querySelector('.sportsmanship-track');
+  const container = track ? track.parentElement : null;
+  if(!track || !container) return;
+
+  if(!Number.isFinite(announcementPosition) || announcementPosition > container.clientWidth || announcementPosition <= -track.offsetWidth){
+    announcementPosition = container.clientWidth;
+  }
+
+  const move = ()=>{
+    if(!document.body.contains(track)) return;
+    announcementPosition -= 1.25;
+    if(announcementPosition <= -track.offsetWidth) announcementPosition = container.clientWidth;
+    track.style.transform = `translate3d(${announcementPosition}px, -50%, 0)`;
+    announcementAnimationFrame = requestAnimationFrame(move);
+  };
+  move();
+}
+
 function renderPublic(){
   const el = document.getElementById('publicView');
+  
+  // Sync state from localStorage
+  sportsmanshipHidden = JSON.parse(localStorage.getItem('sportsmanshipHidden') || 'false');
+  sportsmanshipFullscreen = JSON.parse(localStorage.getItem('sportsmanshipFullscreen') || 'false');
+  
   const tally = teamTally();
 
   const tabBarHtml = `
@@ -435,6 +604,7 @@ function renderPublic(){
   } else {
     body.innerHTML = renderTeamCheckHtml();
   }
+  startAnnouncementScroll();
 }
 
 function renderResultChart(tally){
@@ -445,15 +615,26 @@ function renderResultChart(tally){
       <div class="result-bar-column">
         <div class="result-bar-label red">ทีมสีแดง</div>
         <div class="result-bar-track"><div class="result-bar red" style="height:${barHeight(tally.wins.red)}">${tally.wins.red}</div></div>
-        <div class="result-bar-score">${tally.points.red} คะแนนรวม</div>
       </div>
       <div class="result-bar-column">
         <div class="result-bar-label blue">ทีมสีฟ้า</div>
         <div class="result-bar-track"><div class="result-bar blue" style="height:${barHeight(tally.wins.blue)}">${tally.wins.blue}</div></div>
-        <div class="result-bar-score">${tally.points.blue} คะแนนรวม</div>
       </div>
     </div>
-    <div class="tally-sub">จำนวนคู่ที่ชนะ &middot; แดง ${tally.points.red} คะแนนรวม &middot; ฟ้า ${tally.points.blue} คะแนนรวม</div>`;
+  `;
+}
+
+function renderCelebration(tally){
+  const winner = tally.wins.red === tally.wins.blue ? null : tally.wins.red > tally.wins.blue ? 'red' : 'blue';
+  const message = winner ? `${TEAM_LABEL[winner]} ชนะเลิศ` : 'ผลการแข่งขันเสมอกัน';
+  const fireworks = ['one','two','three','four','five','six','seven','eight'].map(place => `<span class="firework ${place}"></span>`).join('');
+  return `
+    <div class="fireworks-overlay" aria-hidden="true">${fireworks}</div>
+    <div class="celebration" aria-live="polite">
+      <div class="trophy-mark" aria-hidden="true">🏆</div>
+      <div class="celebration-copy">${message}</div>
+    </div>
+  `;
 }
 
 function renderOverviewHtml(tally){
@@ -501,9 +682,20 @@ function renderOverviewHtml(tally){
     </tr>`;
   }).join('');
 
-  const resultHtml = state.resultsPublished ? renderResultChart(tally) : '<div class="result-hidden">รอแอดมินประกาศผล</div>';
+  const resultHtml = state.resultsPublished ? renderCelebration(tally) + renderResultChart(tally) : '<div class="result-hidden">รอแอดมินประกาศผล</div>';
+  const sportsMessage = escapeHtml(state.sportsMessage || '');
+
+  if(sportsmanshipFullscreen){
+    return `<div class="sportsmanship-card fullscreen-view" aria-live="polite"><div class="sportsmanship-copy"><h3>กระดานประกาศแห่งมิตรภาพ</h3><p><span class="sportsmanship-track"><span class="sportsmanship-text">${sportsMessage}</span></span></p></div></div>`;
+  }
 
   return `
+    <div class="sportsmanship-card ${sportsmanshipHidden ? 'hidden' : ''}" aria-live="polite">
+      <div class="sportsmanship-copy">
+        <h3>กระดานประกาศแห่งมิตรภาพ</h3>
+        <p><span class="sportsmanship-track"><span class="sportsmanship-text">${sportsMessage}</span></span></p>
+      </div>
+    </div>
     <div class="section-title" style="margin-top:0;">คะแนนรวมทีม</div>
     ${resultHtml}
 
@@ -558,10 +750,12 @@ function renderAdmin(){
         <div class="idx">${i+1}</div>
         <input type="text" placeholder="ชื่อผู้เล่น 1" value="${escapeAttr(p.p1)}" data-team="${t}" data-idx="${i}" data-field="p1" class="pairInput">
         <input type="text" placeholder="ชื่อผู้เล่น 2" value="${escapeAttr(p.p2)}" data-team="${t}" data-idx="${i}" data-field="p2" class="pairInput">
+        <button class="btn secondary small delPairBtn del-pair-btn" data-team="${t}" data-idx="${i}" type="button" title="ลบคู่นี้">✕</button>
       </div>`).join('');
     return `<div class="card">
-      <h3><span class="dot ${t==='red'?'r':'b'}"></span>${TEAM_LABEL[t]} &middot; 8 คู่</h3>
+      <h3><span class="dot ${t==='red'?'r':'b'}"></span>${TEAM_LABEL[t]}</h3>
       ${rows}
+      <button class="btn small addPairBtn" data-team="${t}" type="button">+ เพิ่มคู่</button>
     </div>`;
   }).join('');
 
@@ -585,6 +779,14 @@ function renderAdmin(){
   }).join('');
 
   el.innerHTML = `
+    <div class="save-bar">
+      <span class="save-status${dataReady ? ' ready' : ''}" id="saveStatus">${dataReady ? 'พร้อมใช้งาน' : 'ยังไม่พร้อม'}</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn secondary small" id="btnToggleSportsmanship" title="ซ่อน/แสดงกระดานประกาศ">${sportsmanshipHidden ? '👁️ แสดง' : '👁️‍🗨️ ซ่อน'}</button>
+        <button class="btn secondary small" id="btnFullscreenSportsmanship" title="ขยาย/ปิดการขยายกระดาน">${sportsmanshipFullscreen ? '↙ ปิดการขยาย' : '⛶ ขยายกระดาน'}</button>
+        <button class="btn secondary" id="btnLogout">Log out</button>
+      </div>
+    </div>
     <div class="card full-w announce-card">
       <div>
         <h3>ประกาศผลการแข่งขัน</h3>
@@ -593,34 +795,92 @@ function renderAdmin(){
       <button class="btn ${state.resultsPublished ? 'secondary' : ''}" id="btnPublishResults">${state.resultsPublished ? 'ซ่อนผลประกาศ' : 'ประกาศผล'}</button>
       <span class="announce-state">${state.resultsPublished ? 'ประกาศแล้ว' : 'ยังไม่ประกาศ'}</span>
     </div>
+    <div class="card full-w message-editor">
+      <div>
+        <h3>ข้อความน้ำใจนักกีฬา</h3>
+        <label for="sportsMessageInput" style="display:block; margin-bottom:8px;">ข้อความนี้จะแสดงบนหน้าจอแสดงผลให้นักกีฬาและผู้ชมเห็น</label>
+      </div>
+      <textarea id="sportsMessageInput" maxlength="300" placeholder="พิมพ์ข้อความให้กำลังใจนักกีฬา...">${escapeHtml(state.sportsMessage)}</textarea>
+    </div>
     <div class="admin-grid">
       ${pairCards}
       <div class="card full-w">
         <h3>ตารางแข่งขัน &middot; ${state.matches.length} คู่</h3>
-        <div class="match-admin-row" style="border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:4px;">
+        <div class="match-admin-row match-admin-header" style="border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:4px;">
           <div class="idx">#</div>
-          <div style="font-size:11px;color:var(--text-dim);">คู่ทีมแดง</div>
-          <div style="font-size:11px;color:var(--text-dim);">คู่ทีมฟ้า</div>
-          <div style="font-size:11px;color:var(--text-dim);">แดง</div>
-          <div style="font-size:11px;color:var(--text-dim);">ฟ้า</div>
-          <div style="font-size:11px;color:var(--text-dim);">สถานะ</div>
+          <div class="header-red">คู่ทีมแดง</div>
+          <div class="header-blue">คู่ทีมฟ้า</div>
+          <div class="header-red">แดง</div>
+          <div class="header-blue">ฟ้า</div>
+          <div class="header-status">สถานะ</div>
           <div style="font-size:11px;color:var(--text-dim);"></div>
         </div>
         ${matchRows}
         <button class="btn small" id="btnAddMatch" style="margin-top:12px;">+ เพิ่มคู่แข่งขัน</button>
       </div>
     </div>
-    <div class="save-bar">
-      <span class="save-status" id="saveStatus">พร้อมใช้งาน</span>
-      <button class="btn secondary" id="btnResetAll">รีเซ็ตข้อมูลทั้งหมด</button>
-    </div>
   `;
 
   document.getElementById('btnPublishResults').addEventListener('click', async ()=>{
+    if(!state.resultsPublished){
+      document.getElementById('publishConfirm').hidden = false;
+      return;
+    }
     state.resultsPublished = !state.resultsPublished;
     await saveState();
     renderAdmin();
   });
+  document.getElementById('sportsMessageInput').addEventListener('input', (e)=>{
+    state.sportsMessage = e.target.value;
+    scheduleSave();
+    document.querySelectorAll('.sportsmanship-text').forEach(message=>{
+      message.textContent = e.target.value;
+    });
+  });
+  document.getElementById('btnToggleSportsmanship').addEventListener('click', ()=>{
+    sportsmanshipHidden = !sportsmanshipHidden;
+    localStorage.setItem('sportsmanshipHidden', JSON.stringify(sportsmanshipHidden));
+    renderAdmin();
+    if(currentView === 'public') renderPublic();
+  });
+  document.getElementById('btnFullscreenSportsmanship').addEventListener('click', ()=>{
+    sportsmanshipFullscreen = !sportsmanshipFullscreen;
+    localStorage.setItem('sportsmanshipFullscreen', JSON.stringify(sportsmanshipFullscreen));
+    if(sportsmanshipFullscreen){
+      document.body.classList.add('sportsmanship-fullscreen-active');
+    } else {
+      document.body.classList.remove('sportsmanship-fullscreen-active');
+    }
+    renderAdmin();
+    if(currentView === 'public') renderPublic();
+  });
+  document.getElementById('cancelPublish').addEventListener('click', ()=>{
+    document.getElementById('publishConfirm').hidden = true;
+  });
+  document.getElementById('confirmPublish').addEventListener('click', async ()=>{
+    document.getElementById('publishConfirm').hidden = true;
+    state.resultsPublished = true;
+    await saveState();
+    renderAdmin();
+  });
+  el.querySelectorAll('.addPairBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.pairs[btn.dataset.team].push({p1:'', p2:''});
+      scheduleSave();
+      renderAdmin();
+    });
+  });
+  el.querySelectorAll('.delPairBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      pendingDelete = {team: btn.dataset.team, idx: Number(btn.dataset.idx)};
+      document.getElementById('deleteConfirm').hidden = false;
+    });
+  });
+  document.getElementById('btnLogout').addEventListener('click', async ()=>{
+    await authApi.signOut(firebaseAuth);
+    switchView('public');
+  });
+  
   el.querySelectorAll('.pairInput').forEach(inp=>{
     inp.addEventListener('input', (e)=>{
       const {team, idx, field} = e.target.dataset;
@@ -663,17 +923,14 @@ function renderAdmin(){
       renderAdmin();
     });
   });
-  document.getElementById('btnResetAll').addEventListener('click', async ()=>{
-    if(confirm('ต้องการรีเซ็ตข้อมูลทั้งหมดใช่หรือไม่? ไม่สามารถย้อนกลับได้')){
-      state = defaultState();
-      await saveState();
-      renderAdmin();
-    }
-  });
 }
 
 function escapeAttr(s){
   return (s||'').replace(/"/g,'&quot;');
+}
+
+function escapeHtml(s){
+  return String(s||'').replace(/[&<>]/g, char=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[char]));
 }
 
 function switchView(view){
@@ -687,17 +944,75 @@ function switchView(view){
 }
 
 document.getElementById('btnPublic').addEventListener('click', ()=>switchView('public'));
-document.getElementById('btnAdmin').addEventListener('click', ()=>switchView('admin'));
-document.querySelector('.brand').addEventListener('click', ()=>{
+document.getElementById('btnAdmin').addEventListener('click', async ()=>{
+  await firebaseReady;
+  if(!firebaseAuth || !authApi){
+    alert('ไม่สามารถเชื่อมต่อ Firebase ได้ กรุณารีเฟรชหน้าเว็บแล้วลองใหม่');
+    return;
+  }
+  if(!firebaseAuth.currentUser){
+    document.getElementById('loginError').textContent = '';
+    document.getElementById('loginForm').reset();
+    document.getElementById('loginPanel').hidden = false;
+    document.getElementById('adminEmail').focus();
+    return;
+  }
+  switchView('admin');
+});
+document.getElementById('cancelLogin').addEventListener('click', ()=>{
+  document.getElementById('loginPanel').hidden = true;
+});
+document.getElementById('cancelDelete').addEventListener('click', ()=>{
+  pendingDelete = null;
+  document.getElementById('deleteConfirm').hidden = true;
+});
+document.getElementById('confirmDelete').addEventListener('click', async ()=>{
+  if(!pendingDelete) return;
+  const {team, idx} = pendingDelete;
+  if(state.pairs[team].length > 1){
+    state.pairs[team].splice(idx, 1);
+    state.matches.forEach(match=>{
+      const field = team === 'red' ? 'redIdx' : 'blueIdx';
+      if(match[field] === idx) match[field] = 0;
+      else if(match[field] > idx) match[field]--;
+    });
+    scheduleSave();
+  }
+  pendingDelete = null;
+  document.getElementById('deleteConfirm').hidden = true;
+  renderAdmin();
+});
+document.getElementById('loginForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const errorEl = document.getElementById('loginError');
+  errorEl.textContent = 'กำลังตรวจสอบ...';
+  try{
+    await authApi.signInWithEmailAndPassword(firebaseAuth, document.getElementById('adminEmail').value.trim(), document.getElementById('adminPassword').value);
+    document.getElementById('loginPanel').hidden = true;
+    switchView('admin');
+  }catch(error){
+    errorEl.textContent = 'เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่าน';
+  }
+});
+function showPublicOverview(){
   publicTab = 'overview';
   switchView('public');
-});
+}
+
+document.querySelector('.brand').addEventListener('click', showPublicOverview);
 document.querySelector('.brand').addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter' || e.key === ' '){
-    e.preventDefault();
-    publicTab = 'overview';
-    switchView('public');
-  }
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  e.preventDefault();
+  showPublicOverview();
+});
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Escape' || !sportsmanshipFullscreen) return;
+  sportsmanshipFullscreen = false;
+  localStorage.setItem('sportsmanshipFullscreen', 'false');
+  document.body.classList.remove('sportsmanship-fullscreen-active');
+  if(currentView === 'public') renderPublic();
+  else renderAdmin();
 });
 
 async function init(){
@@ -711,6 +1026,21 @@ async function init(){
   }, 3000);
 }
 init();
+  
+  // Listen for localStorage changes from other tabs
+  window.addEventListener('storage', (e)=>{
+    if(e.key === 'sportsmanshipHidden'){
+      sportsmanshipHidden = JSON.parse(e.newValue || 'false');
+    }
+    if(e.key === 'sportsmanshipFullscreen'){
+      sportsmanshipFullscreen = JSON.parse(e.newValue || 'false');
+    }
+    if(currentView === 'public'){
+      renderPublic();
+    } else {
+      renderAdmin();
+    }
+  });
 </script>
 </body>
 </html>
